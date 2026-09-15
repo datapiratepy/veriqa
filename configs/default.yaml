@@ -1,0 +1,44 @@
+# VeriQA configuration - single source of truth. Frozen for the reported run.
+seed: 20260814
+
+data:
+  train_json: data/raw/train-v2.0.json
+  dev_json:   data/raw/dev-v2.0.json
+
+corpus:
+  # Corpus A (main experiment) is sampled from train-v2.0; Corpus B (E6 domain
+  # shift) is dev-v2.0. Article titles are disjoint - verified in ingestion.
+  n_articles_A: 120
+  max_questions_per_article: 100
+  # Protocol B (D-002): a question may retrieve its own gold paragraph and any
+  # paragraph from another article, never a sibling paragraph of its own article.
+  mask_siblings: true
+
+splits:                    # by ARTICLE, never by question (D-004)
+  reader_train: 0.40
+  rel_train:    0.20
+  rel_calib:    0.10
+  test:         0.30
+
+retrieval:
+  k: 5
+  svd_dim: 256             # LSA dimensionality for the dense representation
+  hybrid_alpha: 0.5        # score = a*dense + (1-a)*bm25, both min-max normalised
+  sim_tau: 0.30            # threshold for the r_n_above_tau feature
+
+reader:
+  max_span_tokens: 8
+  max_candidates_per_passage: 1200
+  neg_per_pos: 400        # negatives per positive; candidates are sentence-restricted
+
+reliability:
+  target_accuracy: 0.80
+  gbm_max_iter: 200
+  gbm_learning_rate: 0.1
+
+evaluation:
+  f1_threshold: 0.5        # correctness cut (D-005); sensitivity at 0.4 / 0.6
+  f1_sensitivity: [0.4, 0.6]
+  bootstrap_n: 1000
+  coverages: [0.5, 0.7, 0.9]
+  target_accuracies: [0.8, 0.9]

@@ -1,0 +1,2 @@
+ece_before_isotonic,ece_after_isotonic,target_accuracy,threshold_from_calibration,accuracy_on_calibration,coverage_on_calibration,accuracy_realised_on_test,coverage_realised_on_test,realisation_gap
+0.08954371371455601,0.01199503821686163,0.8,0.5714285714285714,0.6,0.004166666666666667,0.28,0.00697350069735007,-0.52

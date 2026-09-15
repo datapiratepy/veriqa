@@ -1,0 +1,33 @@
+[
+  {
+    "case": "lowest-risk answered",
+    "question": "Until 1988 who was the governor of the Federal District appointed by?",
+    "prediction": "Brazilian Federal Senate",
+    "gold": [],
+    "is_impossible": true,
+    "risk": 0.5714285714285714,
+    "correct": false
+  },
+  {
+    "case": "highest-risk (correctly flagged)",
+    "question": "How many passengers came through Brasilia's airport in 2007?",
+    "prediction": "11,119",
+    "gold": [
+      "11,119,872"
+    ],
+    "is_impossible": false,
+    "risk": 1.0,
+    "correct": false
+  },
+  {
+    "case": "lowest-risk correct answer",
+    "question": "What is the fourth and final stomach compartment in ruminants?",
+    "prediction": "abomasum",
+    "gold": [
+      "The abomasum"
+    ],
+    "is_impossible": false,
+    "risk": 0.5714285714285714,
+    "correct": true
+  }
+]

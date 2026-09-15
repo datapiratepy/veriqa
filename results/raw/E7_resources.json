@@ -1,0 +1,11 @@
+{
+  "peak_rss_mb_this_process": 210.3203125,
+  "index_build_s_A": 4.639467477798462,
+  "reader_fit_s_A": 29.208396673202515,
+  "passages_A": 5637,
+  "model_sizes_mb": {
+    "artifacts_A.pkl": 56.959118,
+    "reliability_A.pkl": 1.448509
+  },
+  "note": "No pretrained neural weights are loaded; see READER_BACKEND.md"
+}

@@ -1,0 +1,82 @@
+{
+  "frozen_at": "2026-08-13T09:28:40",
+  "seed": 20260814,
+  "python": "3.10.12",
+  "config_sha256_16": "2efbd965c500299c",
+  "data_sha": {
+    "dev-v2.0.json": "80a5225e94905956",
+    "train-v2.0.json": "68dcfbb971bd3e96"
+  },
+  "gates": {
+    "G0_negative_control_in_0.45_0.55": {
+      "value": 0.48868446322258496,
+      "pass": true
+    },
+    "G1_base_reader_accuracy_ge_0.45": {
+      "value": 0.11436541143654111,
+      "pass": false
+    },
+    "G2_any_method_error_auc_ge_0.70": {
+      "value": 0.6389898213942768,
+      "pass": false
+    },
+    "G3_P1_AURC_lt_B5_CI_excludes_0": {
+      "value": -0.03452250381919811,
+      "ci": [
+        -0.0494716492851793,
+        -0.019098034689611895
+      ],
+      "pass": true
+    },
+    "G4_P1_AURC_lt_B4_CI_excludes_0": {
+      "value": -0.029340940106444707,
+      "ci": [
+        -0.04420392137523192,
+        -0.01500005267536795
+      ],
+      "pass": true
+    },
+    "G5_ECE_lt_0.10_and_target_within_3pts": {
+      "ece": 0.0119950382168616,
+      "realisation_gap": -0.52,
+      "pass": false
+    },
+    "G6_reliability_layer_lt_100ms": {
+      "value_ms": 1.9568185000480296,
+      "pass": true
+    }
+  },
+  "headline": {
+    "test_questions": 3585,
+    "test_articles": 36,
+    "base_accuracy": 0.11436541143654111,
+    "P1_error_auc": 0.6389898213942768,
+    "P1_error_auc_ci": [
+      0.6127289403427801,
+      0.6667616489525582
+    ],
+    "B5_error_auc": 0.5241793739197235,
+    "B4_error_auc": 0.5526475897829844,
+    "delta_aurc_P1_B5": -0.03452250381919811,
+    "ci": [
+      -0.0494716492851793,
+      -0.019098034689611895
+    ],
+    "ece_after": 0.0119950382168616,
+    "median_e2e_ms": 63.76672500005043,
+    "reliability_layer_ms": 1.9568185000480296,
+    "transfer_A_to_B_P1_auc": 0.64945
+  },
+  "tables": {
+    "T10_by_question_type.csv": "f7f35eaa4f22e666",
+    "T1_dataset.csv": "afb52576af34d546",
+    "T2_main_comparison.csv": "e71295eb128d05ea",
+    "T3_calibration.csv": "3bf0e5246f1fe511",
+    "T4_ablation.csv": "a68eca3b0e72efe2",
+    "T5_permutation_importance.csv": "3f36c024b8f59c81",
+    "T6_domain_shift.csv": "61cab304a22ec5e7",
+    "T7_latency.csv": "b5b6547dd0cafda6",
+    "T8_f1_sensitivity.csv": "90a7267c870c9521",
+    "T9_error_taxonomy.csv": "72fca3dcdd0b339c"
+  }
+}

@@ -1,0 +1,6 @@
+category,count,fraction
+"wrong span (gold retrieved, no overlap)",1844,0.5143654114365411
+unanswerable question answered anyway,1056,0.29456066945606696
+correct,410,0.11436541143654114
+retrieval failure (gold passage not in top-k),219,0.06108786610878661
+partial span overlap below threshold,56,0.015620641562064157

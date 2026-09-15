@@ -1,0 +1,26 @@
+{
+  "B": {
+    "stats": {
+      "name": "B",
+      "articles": 35,
+      "passages": 1204,
+      "questions": 3500,
+      "unanswerable": 1766,
+      "unanswerable_frac": 0.5046
+    },
+    "t_index_s": 1.1832835674285889,
+    "t_reader_fit_s": 8.258227109909058
+  },
+  "A": {
+    "stats": {
+      "name": "A",
+      "articles": 120,
+      "passages": 5637,
+      "questions": 11921,
+      "unanswerable": 3716,
+      "unanswerable_frac": 0.3117
+    },
+    "t_index_s": 4.639467477798462,
+    "t_reader_fit_s": 29.208396673202515
+  }
+}
