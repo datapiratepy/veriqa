@@ -1,5 +1,9 @@
 # Demo Guide — 8 minutes
 
+> **Questions to use:** the verified questions, with the exact answers and risk values to
+> expect, are in [DEMO_SCREENSHOT_GUIDE.md](DEMO_SCREENSHOT_GUIDE.md). This file is the timed
+> script. The app answers over the fixed SQuAD 2.0 corpus: there is no document upload.
+
 > Every number spoken aloud must come from `results/RESULT_FREEZE.json`. The app's
 > "Frozen results" tab reads that file directly, so use it rather than reciting from memory.
 
@@ -21,7 +25,7 @@ to 1.0 so the gate is disabled. The system returns a confident, specific, wrong 
 **0:45–1:30 · Architecture.** Show `docs/ARCHITECTURE.md`. Point at the starred box.
 > "Standard retrieval and reading. Our contribution is this layer between the reader and you."
 
-**1:30–2:30 · Ingestion and retrieval.** Ask an answerable question. Open "All retrieved
+**1:30–2:30 · Retrieval.** Ask an answerable question. Open "All retrieved
 evidence": five passages with fused scores.
 
 **2:30–3:30 · Reliability features.** Open the feature table. Sixteen signals, three families.

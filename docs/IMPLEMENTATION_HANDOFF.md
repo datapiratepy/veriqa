@@ -3,6 +3,14 @@
 **Date:** 17 August 2026 · **Audience:** Harsh Kamat, Harsh Ranjan, Manish Kumar
 **Purpose:** an honest inventory of what actually exists, and exact instructions to run it on Windows.
 
+> **Note (September 2026):** moved here from the repository root. File paths below describe the
+> layout when this handoff was written; `DEMO_SCREENSHOT_GUIDE.md` now lives in `docs/demo/`,
+> and `docs/RESEARCH_PROTOCOL.md` was a duplicate of `docs/research/SQUAD_ANSWERABILITY_PROTOCOL.md`.
+> Discrepancies 1–3, known issue 4 and item K(ii) below describe earlier drafts and are resolved:
+> `docs/ARCHITECTURE.md` lists no experiment scripts, `docs/demo/DEMO_GUIDE.md` describes no
+> upload or side-by-side pane, and Fig. 1 of the final paper shows no PDF/TXT/MD ingestion.
+> Document upload and PDF/TXT/MD ingestion themselves still do not exist.
+
 > **Evidence levels used throughout this document.** Every claim is tagged.
 > **[VERIFIED]** — I executed it in this session and observed the output.
 > **[INFERRED]** — read from source code, not executed.
@@ -102,9 +110,9 @@ demonstration surfaces over the same trained artefacts.
 
 | # | Issue | Reality |
 |---|---|---|
-| 1 | **`experiments/03_extract_features.py` does not exist.** `docs/ARCHITECTURE.md` and the roadmap imply a 9-script chain 01–09. | Feature extraction happens inside `02_run_pipeline.py` via `pipeline.run_questions()`, which calls `features.extract_all()` per question. The numbering skips 03. **No results are affected**; only the documentation is misleading. |
-| 2 | The paper's Fig. 1 shows "PDF/TXT/MD ingestion". | `src/veriqa/ingestion/squad.py` **only parses SQuAD JSON.** There is no PDF or Markdown loader. The Streamlit app has **no document-upload control.** The paper does not claim upload, but earlier planning docs did. **Do not demo document upload — it does not exist.** |
-| 3 | `docs/DEMO_GUIDE.md` describes uploading a PDF live and a "side-by-side baseline pane". | Neither exists. Use `DEMO_SCREENSHOT_GUIDE.md` instead — it describes only what is real. |
+| 1 | *(Resolved in the published docs.)* **`experiments/03_extract_features.py` does not exist.** `docs/ARCHITECTURE.md` and the roadmap imply a 9-script chain 01–09. | Feature extraction happens inside `02_run_pipeline.py` via `pipeline.run_questions()`, which calls `features.extract_all()` per question. The numbering skips 03. **No results are affected**; only the documentation is misleading. |
+| 2 | *(Resolved in the final paper.)* The paper's Fig. 1 shows "PDF/TXT/MD ingestion". | `src/veriqa/ingestion/squad.py` **only parses SQuAD JSON.** There is no PDF or Markdown loader. The Streamlit app has **no document-upload control.** The paper does not claim upload, but earlier planning docs did. **Do not demo document upload — it does not exist.** |
+| 3 | *(Resolved: the current guide has neither.)* `docs/DEMO_GUIDE.md` describes uploading a PDF live and a "side-by-side baseline pane". | Neither exists. Use `DEMO_SCREENSHOT_GUIDE.md` instead — it describes only what is real. |
 | 4 | `requirements.txt` pins `pytest==8.*` | Works, but `pip` may warn. Harmless. |
 
 ---
@@ -331,8 +339,8 @@ changed during this audit.
    smooth. This is a real property of the trained model, not a UI bug.
 3. **Streamlit deprecation warnings** about `use_container_width`. Cosmetic; harmless on
    1.61.x.
-4. **The paper's Fig. 1 mentions document ingestion generally; there is no upload UI.** See
-   Discrepancy 2.
+4. *(Resolved in the final paper.)* **The paper's Fig. 1 mentions document ingestion generally;
+   there is no upload UI.** See Discrepancy 2.
 
 ---
 
@@ -472,7 +480,7 @@ design; feature extraction lives in `02`); PDF/TXT/MD ingestion; document upload
 side-by-side baseline pane; visible query history.
 
 **K. Still needs fixing** — (i) verify SQLite logging works on your Windows drive;
-(ii) correct `docs/ARCHITECTURE.md` and `docs/demo/DEMO_GUIDE.md`, which describe features
+(ii) *(done)* correct `docs/ARCHITECTURE.md` and `docs/demo/DEMO_GUIDE.md`, which describe features
 that do not exist; (iii) optionally silence the Streamlit deprecation warnings. **None of
 these affect the reported results.**
 

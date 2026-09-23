@@ -25,7 +25,8 @@ A complete, tested, runnable CPU-only selective extractive QA system:
   query log.
 - **Tests** — 19, including hand-computed metric fixtures, feature range/finiteness checks,
   retrieval ordering, sibling masking, and article-disjointness of all four partitions.
-- **9 experiment scripts**, resumable, seeded, producing 10 result tables and 5 figures.
+- **8 experiment scripts** (`01`, `02`, `04`–`09`; feature extraction runs inside `02`, so there
+  is no `03`), resumable, seeded, producing 10 result tables and 5 figures.
 
 ## 2. What was experimentally demonstrated
 
@@ -77,6 +78,9 @@ Seed 20260814 throughout. Data SHA-256 in `data/raw/CHECKSUMS.txt`; config and t
 write intermediate artefacts. 19 tests pass. Only latency varies across hosts.
 
 ## 10. IEEE-paper readiness
+
+> **Superseded.** This section describes the manuscript as of 13 August 2026. The final paper
+> and its validation records are in [`paper/`](../paper/README.md).
 
 `paper/VERIQA_IEEE_MANUSCRIPT.md` and `.tex`, ~5,370 words, 6 tables, 13 sections plus references.
 
