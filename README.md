@@ -1,12 +1,6 @@
-# VeriQA
+# VeriQA — Selective Extractive Question Answering
 
-### Selective extractive question answering: knowing when not to answer
-
-VTU major project (B.E. Computer Science and Engineering), AMC Engineering College,
-Bengaluru, 2026.
-
-**Team:** Harsh Kamat · Harsh Ranjan · Manish Kumar
-**Project guide:** Divya Tyagi · **Project coordinator:** Snigdha Kesh
+VTU Major Project · B.E. Computer Science and Engineering · 2026
 
 ---
 
@@ -37,9 +31,9 @@ The contribution is the measurement, not a new mechanism. The Kamath et al. cali
 reimplemented here as baseline B5 and credited as theirs.
 
 The evaluation uses SQuAD 2.0. Because SQuAD's "unanswerable" labels are
-paragraph-relative, adding retrieval can silently invalidate them. The team measured this
-(14.89% of substantive unanswerable questions had their plausible answer elsewhere in an
-article-pooled corpus) and adopted **sibling masking**, which cuts it to 2.39%
+paragraph-relative, adding retrieval can silently invalidate them: in an article-pooled
+corpus, 14.89% of substantive unanswerable questions had their plausible answer somewhere
+else in the corpus. VeriQA therefore uses **sibling masking**, which cuts this to 2.39%
 ([protocol](docs/research/SQUAD_ANSWERABILITY_PROTOCOL.md)).
 
 ## 3. Architecture
@@ -75,27 +69,43 @@ Module-by-module detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Design de
 including two bugs caught and fixed before the results were frozen:
 [docs/DECISIONS_LOG.md](docs/DECISIONS_LOG.md).
 
-## 4. My contribution (Harsh Kamat)
+## 4. Engineering work
 
-My part of the system is the **reader** and the **reliability layer**, the component that
-decides whether to answer, plus the baselines it is measured against:
+The parts of VeriQA I built are the extractive **reader** and the **reliability layer**, the
+component that decides whether to answer, together with the baselines they are measured
+against.
 
-| Module | What it does |
-|---|---|
-| [`reader/spans.py`](src/veriqa/reader/spans.py) | Candidate-span generation and the 20 vectorised span features |
-| [`reader/extractive.py`](src/veriqa/reader/extractive.py) | Two-stage reader: sentence selection, gradient-boosted span scorer, trained null-answer head, and the `read()` interface |
-| [`reliability/features.py`](src/veriqa/reliability/features.py) | The 16 reliability features across the retrieval, reader and agreement families |
-| [`reliability/calibrator.py`](src/veriqa/reliability/calibrator.py) | Gradient-boosted risk model, isotonic calibration, threshold selection on calibration data |
-| [`baselines/methods.py`](src/veriqa/baselines/methods.py) | Baselines B1–B5 (B5 reimplements Kamath et al.) and the fitting of the proposed calibrator P1 |
+- **Extractive reader** ([`reader/spans.py`](src/veriqa/reader/spans.py),
+  [`reader/extractive.py`](src/veriqa/reader/extractive.py)). Two stages: candidate spans
+  of up to 8 tokens come only from the three sentences with the highest question overlap,
+  spans that begin or end on a stopword or punctuation token are discarded, and the rest
+  are scored by a gradient-boosted model over 20 vectorised span features. A separately trained gradient-boosted null-answer
+  head estimates the probability that a passage holds no answer. `read()` returns a
+  `ReadOut` (answer, span probability, null score, span length, span entropy, source
+  passage): the interface a transformer reader would fill.
+- **Reliability features**
+  ([`reliability/features.py`](src/veriqa/reliability/features.py)). Sixteen signals in
+  three families. Retrieval (7): top-1 similarity, top-1 margin, mean and entropy of the
+  retrieval scores, passages above a similarity threshold, lexical overlap, question
+  length. Reader (5): span probability, null score, their gap, span length, span entropy.
+  Agreement (4): passages that yield an answer, similarity of the top two answers, majority
+  share, and whether the answer also appears in the second passage. All are computed from
+  artefacts the pipeline already produced, so the layer needs no second model pass.
+- **Risk model and abstention gate**
+  ([`reliability/calibrator.py`](src/veriqa/reliability/calibrator.py)). A
+  HistGradientBoosting classifier predicts the probability that the answer is wrong,
+  isotonic regression calibrates it on held-out data, and the abstention threshold is set
+  on the calibration split only: the widest coverage at which accuracy still meets the
+  target, or the most accurate point when no coverage does.
+- **Baselines** ([`baselines/methods.py`](src/veriqa/baselines/methods.py)). B1 always
+  answers; B2 thresholds the span probability; B3 the top-1 retrieval score; B4 the
+  reader's own null-answer head. B5, after Kamath, Jia & Liang (2020), is the same risk
+  model trained on the five reader features only, so B5 and the proposed P1 differ only in
+  their features.
 
-**Harsh Ranjan** owned ingestion and corpus construction (`ingestion/squad.py`) and the
-hybrid retriever with sibling masking (`retrieval/hybrid.py`). **Manish Kumar** owned the
-evaluation layer (`evaluation/splits.py`, `metrics.py`, `squad_eval.py`), the query service,
-the FastAPI backend and the Streamlit app.
-
-This split follows the team's module map in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-The repository was published as a single squashed commit, so per-file authorship is
-recorded there rather than in the git history.
+Module-level ownership for the rest of the pipeline (ingestion, retrieval, the evaluation
+layer, the query service, the API and the demo app) is recorded in
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#module-map).
 
 ## 5. Results
 
@@ -207,10 +217,10 @@ Details: [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) · [docs/SETUP.md](d
 ## 8. Project status
 
 - **Implementation and experiments complete**, with results frozen on 2026-08-13.
-- **Paper:** an IEEE-format manuscript, *Quantifying the Incremental Value of
-  Retrieval-Side Reliability Signals for Selective Extractive Question Answering*, is in
-  [`paper/`](paper/) ([PDF](paper/VERIQA_IEEE_FINAL.pdf)). It is **not published and has
-  not been peer reviewed**.
+- **Paper:** *Quantifying the Incremental Value of Retrieval-Side Reliability Signals for
+  Selective Extractive Question Answering*. IEEE-format manuscript submitted for
+  publication; currently under review. The manuscript is in [`paper/`](paper/)
+  ([PDF](paper/VERIQA_IEEE_FINAL.pdf)).
 - **The most valuable next step** is re-running the measurement with a transformer reader.
   The reader sits behind one interface (`read()` returns a `ReadOut`), so a transformer can
   be dropped in without touching the reliability layer.

@@ -100,13 +100,6 @@ code is backend-agnostic to allow it.
 **Isn't this just thresholding a confidence score?** That is baseline B2, and we report it: ROC-AUC
 0.4920, indistinguishable from chance. The difference is where the information comes from.
 
-## Who defends what
-- **Harsh Ranjan** — ingestion, chunking decision, LSA + BM25, sibling masking, why paragraphs are
-  not chunked.
-- **Harsh Kamat** — the reader's two stages, the 16 features, gradient boosting, isotonic, the gate.
-- **Manish Kumar** — metrics and why each was chosen, cluster bootstrap, the negative control,
-  leakage tests, the app.
-
 ## Three rules
 Never invent a number — "it's in Table II" is a fine answer. When you don't know, say so and say
 how you'd find out. Volunteer the limitations before you're asked.

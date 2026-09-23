@@ -98,6 +98,10 @@ write intermediate artefacts. 19 tests pass. Only latency varies across hosts.
 
 ## 11. Remaining manual tasks
 
+> This list dates from 13 August 2026. The manuscript has since been submitted for
+> publication and is currently under review; the final paper records are in
+> [`paper/`](../paper/README.md).
+
 1. **Verify references [2]–[10]** — authors, title, venue, year, pages, DOI. Non-negotiable.
 2. **Compile the `.tex` against the real IEEEtran template**, then check page count and captions.
 3. **Re-run with a transformer reader** on a machine with Hugging Face access. Highest research

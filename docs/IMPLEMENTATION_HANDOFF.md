@@ -1,6 +1,6 @@
 # VeriQA — Implementation Handoff
 
-**Date:** 17 August 2026 · **Audience:** Harsh Kamat, Harsh Ranjan, Manish Kumar
+**Date:** 17 August 2026 · **Audience:** the project team
 **Purpose:** an honest inventory of what actually exists, and exact instructions to run it on Windows.
 
 > **Note (September 2026):** moved here from the repository root. File paths below describe the

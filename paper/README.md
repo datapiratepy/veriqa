@@ -6,8 +6,7 @@ Extractive Question Answering**
 Harsh Kamat, Harsh Ranjan, Manish Kumar, Divya Tyagi, Snigdha Kesh ·
 Department of Computer Science and Engineering, AMC Engineering College (VTU), Bengaluru
 
-**Status:** IEEE conference-format manuscript. It is **not published and has not been peer
-reviewed**.
+**Status:** IEEE-format manuscript submitted for publication; currently under review.
 
 ## Files
 
